@@ -1,4 +1,5 @@
 {
-    "title": "sveltekit i18n ภาษาไทย",
-    "appName": "สเวลคิส แอฟ"
+    "title": "สเวลคิส i18next ภาษาไทย",
+    "appName": "สเวลคิส แอฟ",
+    "withName": "{{msg}} สเวลคิส"
 }

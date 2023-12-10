@@ -1,4 +1,5 @@
 {
     "title": "sveltekit i18n",
-    "appName": "Sveltekit app"
+    "appName": "Sveltekit app",
+    "withName": "Sveltekit {{msg}}"
 }

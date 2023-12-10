@@ -1,7 +1,9 @@
 <script>
+	// @ts-nocheck
+
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import welcome from '$lib/images/svelte-welcome.webp';
-	import { t } from '$lib/translation';
+	import { t } from '$lib/translation/config';
 	import Counter from './Counter.svelte';
 </script>
 
@@ -19,7 +21,8 @@
 			</picture>
 		</span>
 
-		{$t('appName')}
+		{$t('common.appName')} <br />
+		{$t('common.withName', { msg: 'ชื่อ' })}
 	</h1>
 
 	<h2>
