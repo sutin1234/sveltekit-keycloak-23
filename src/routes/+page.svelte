@@ -1,6 +1,7 @@
 <script>
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import welcome from '$lib/images/svelte-welcome.webp';
+	import { t } from '$lib/translation';
 	import Counter from './Counter.svelte';
 </script>
 
@@ -18,7 +19,7 @@
 			</picture>
 		</span>
 
-		to your new<br />SvelteKit app
+		{$t('appName')}
 	</h1>
 
 	<h2>
