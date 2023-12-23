@@ -8,7 +8,7 @@
 	} from '$lib/stores';
 	import Keycloak, { type KeycloakConfig, type KeycloakInitOptions } from 'keycloak-js';
 	import { getContext, onMount } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { type Writable } from 'svelte/store';
 	import Header from './Header.svelte';
 	import './styles.css';
 	const darkMode = useDarkMode();
@@ -24,13 +24,16 @@
 	const kcInitOptions: KeycloakInitOptions = {
 		onLoad: 'login-required',
 		checkLoginIframe: false,
-		redirectUri: 'http://localhost:5173'
+		redirectUri: 'http://localhost:5173/'
 	};
 
 	let keycloakInstance: Keycloak;
 
 	onMount(async () => {
+		kcInitOptions.redirectUri += '/' + window.location.pathname;
 		keycloakInstance = new Keycloak(kcConfig);
+		const authenticateStorage = getAuthenticateStorage();
+
 		keycloakInstance
 			.init(kcInitOptions)
 			.then((auth) => {
@@ -39,6 +42,7 @@
 			.catch((error: any) => {
 				console.log('keycloak init error ', error);
 			});
+
 		jokerStore.setJoker('new joker');
 
 		keycloakInstance.onReady = () => {
@@ -88,6 +92,16 @@
 		if (typeof keycloakInstance?.logout == 'function') {
 			keycloakInstance.logout();
 		}
+	};
+
+	const getAuthenticateStorage = (key: string = 'authenticated') => {
+		try {
+			const authenticated = localStorage.getItem(key) ?? 'false';
+			return JSON.parse(authenticated);
+		} catch (error) {
+			return false;
+		}
+		return false;
 	};
 </script>
 
